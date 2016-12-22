@@ -7,7 +7,7 @@ $bg_color: if($variant == "dark", #444, #eee);
 $fg_color: if($variant == "dark", #ddd, #555);
 $base_color: if($variant == "dark", #333, #fff);
 $text_color: if($variant == "dark", #eee, #333);
-$selected_bg_color: #f0544c;
+$selected_bg_color: #1e88e5;
 $selected_fg_color: #fff;
 $tooltip_bg_color: #444;
 $tooltip_fg_color: #eee;
@@ -46,14 +46,14 @@ $switch_slider_bg_color: #fbfbfb;
 
 // misc colors used by gtk+
 $info_fg_color: #fff;
-$info_bg_color: #03a9f4;
+$info_bg_color: #2196f3;
 $warning_fg_color: #fff;
 $warning_bg_color: #ef6c00;
 $question_fg_color: #fff;
 $question_bg_color: #673ab7;
 $error_fg_color: #fff;
 $error_bg_color: #f44336;
-$link_color: #fc6f5d;
+$link_color: #42a5f5;
 $success_color: #4caf50;
 $warning_color: #ef6c00;
 $error_color: #f44336;
