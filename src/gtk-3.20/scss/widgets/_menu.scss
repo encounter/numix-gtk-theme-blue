@@ -1,6 +1,32 @@
 @import "entry";
 
 
+
+@mixin menu_calendar($bg, $fg) {
+    color: $fg;
+
+    &.header {
+        border-bottom: 1px solid shade($bg, ($contrast + .1));
+        border-radius: 0;
+
+        &:backdrop { border-color: shade($bg, ($contrast + .1)); }
+    }
+
+    &.button {
+        @extend %undecorated_button;
+        color: alpha($fg, .55);
+
+        &:hover {
+            @extend %undecorated_button;
+            color: $fg;
+        }
+    }
+
+    &:indeterminate,
+    &:indeterminate:backdrop { color: mix($fg, $bg, .5); }
+}
+
+
 /*********
  ! Menubar
 **********/
@@ -47,7 +73,7 @@
     .context-menu {
         border: 0;
         border-radius: 0;
-        padding: 2px 0;
+        padding: 0;
         background-color: $menu_bg_color;
         color: $menu_fg_color;
 
@@ -59,7 +85,7 @@
         separator,
         .csd & separator {
             background-color: shade($menu_bg_color, ($contrast + .1));
-            margin: ($spacing - 2px) 0;
+            margin: 1px 0;
         }
 
         // Firefox workaround
@@ -67,7 +93,7 @@
         .csd & .separator { color: shade($menu_bg_color, ($contrast + .1)); }
 
         menuitem {
-            min-height: 16px;
+            min-height: 14px;
             min-width: 40px;
             padding: $spacing - 1px;
             border-radius: 0;
@@ -85,8 +111,8 @@
 
             // submenu indicators
             arrow {
-                min-height: 16px;
-                min-width: 16px;
+                min-height: 14px;
+                min-width: 14px;
 
                 &:dir(ltr) {
                     -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
@@ -115,31 +141,7 @@
                 }
             }
 
-            calendar {
-                color: $menu_fg_color;
-
-                &.header {
-                    border-bottom: 1px solid shade($menu_bg_color, ($contrast + .1));
-                    border-radius: 0;
-
-                    &:backdrop { border-color: shade($menu_bg_color, ($contrast + .1)); }
-                }
-
-                &.button {
-                    @extend %undecorated_button;
-
-                    color: alpha($menu_fg_color, .55);
-
-                    &:hover {
-                        @extend %undecorated_button;
-
-                        color: $menu_fg_color;
-                    }
-                }
-
-                &:indeterminate,
-                &:indeterminate:backdrop { color: mix($menu_fg_color, $menu_bg_color, .5); }
-            }
+            calendar { @include menu_calendar($menu_bg_color, $menu_fg_color); }
 
             // avoids labels color being overridden, see
             // https://bugzilla.gnome.org/show_bug.cgi?id=767058
@@ -150,8 +152,8 @@
         > arrow {
             //@include button(undecorated);
 
-            min-height: 16px;
-            min-width: 16px;
+            min-height: 14px;
+            min-width: 14px;
             padding: $spacing;
             background-color: $menu_bg_color;
             border-radius: 0;
@@ -194,8 +196,8 @@
         }
 
         check, radio {
-            min-height: 16px;
-            min-width: 16px;
+            min-height: 14px;
+            min-width: 14px;
 
             &:dir(ltr) { margin-right: 7px; }
             &:dir(rtl) { margin-left: 7px; }
@@ -276,6 +278,8 @@
 
         button { @include button($menu_bg_color, $menu_fg_color); }
 
+        calendar { @include menu_calendar($menu_bg_color, $menu_fg_color); }
+
         > list, > .view, > toolbar {
             border-style: none;
             background-color: transparent;
@@ -284,7 +288,7 @@
 
     modelbutton.flat,
     menuitem.button.flat {
-        padding: $spacing ($spacing + 2px);
+        padding: ($spacing - 1px) ($spacing + 1px);
         outline-color: transparent;
         transition: none;
 
